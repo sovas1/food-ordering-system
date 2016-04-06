@@ -20,7 +20,7 @@ insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'Polis
 
 insert into maincourses (ID,NAME,PRICE) values(null,'Pepita con tasejo',38.0);
 insert into deserts (ID,NAME,PRICE) values(null,'Tabasco Ice Cream',7.0);
-insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'MexicanOne',1,3L,3L);
+insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'Mexican Specials',1,3L,3L);
 
 insert into maincourses (ID,NAME,PRICE)values(null,'Lasagne bolognese',28.0);
 insert into deserts (ID,NAME,PRICE) values(null,'Tiramisu',12.0);
@@ -28,8 +28,8 @@ insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'Viva 
 
 insert into maincourses (ID,NAME,PRICE) values(null,'Bigos',18.0);
 insert into deserts (ID,NAME,PRICE) values(null,'Makowiec Cake',12.0);
-insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'PolishTwo',0,5L,5L);
+insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'Tradition',0,5L,5L);
 
 insert into maincourses (ID,NAME,PRICE) values(null,'Tacos',29.0);
 insert into deserts (ID,NAME,PRICE) values(null,'Flan de Vanilla',11.0);
-insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'MexicanTwo',1,6L,6L);
+insert into lunches (ID,NAME,CUISINE,MAINCOURSE_ID,DESERT_ID) values(null,'Tacos, Tacos Everywhere',1,6L,6L);
