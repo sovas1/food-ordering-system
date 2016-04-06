@@ -1,18 +1,108 @@
 package org.sovas.services;
 
+import lombok.Data;
 import org.sovas.models.Drink;
 import org.sovas.models.Lunch;
 import org.sovas.models.Order;
 import org.sovas.models.cuisine.Cuisine;
 import org.sovas.models.lunchParts.Desert;
 import org.sovas.models.lunchParts.MainCourse;
+import org.sovas.services.dao.drinkDao.DrinkDaoImpl;
+import org.sovas.services.dao.lunchDao.LunchDaoImpl;
+import org.sovas.services.dao.lunchParts.desertDao.DesertDaoImpl;
+import org.sovas.services.dao.lunchParts.mainCourseDao.MainCourseDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Data
+@Service
 public class RestaurantService {
 
+    // dao beans
+    @Autowired
+    private LunchDaoImpl lunchDaoBean;
 
-    protected static int validator(int min, int max) {
+    @Autowired
+    private DrinkDaoImpl drinkDaoBean;
+
+    @Autowired
+    private MainCourseDaoImpl mainCourseDaoBean;
+
+    @Autowired
+    private DesertDaoImpl desertDaoBean;
+
+    // database
+    private List<Lunch> lunches;
+    private List<Drink> drinks;
+    private List<MainCourse> mainCourses;
+    private List<Desert> deserts;
+
+    static Order order = new Order();
+
+    public void setUpDatabase() {
+        lunches = lunchDaoBean.getAll();
+        drinks = drinkDaoBean.getAll();
+        mainCourses = mainCourseDaoBean.getAll();
+        deserts = desertDaoBean.getAll();
+    }
+
+
+    public void doOrder() {
+        System.out.println("Hello Customer! How can I help you?");
+        System.out.println("1. Order");
+        System.out.println("2. Quit");
+
+
+        int choose = validator(1,2);
+
+        if (choose == 2) {
+            System.out.println("Have a nice day!");
+            return;
+        }
+
+        if (choose == 1) {
+            System.out.println("Pick cuisine");
+            System.out.println("1. Polish");
+            System.out.println("2. Mexican");
+            System.out.println("3. Italian");
+
+            choose = validator(1,3);
+
+            if (choose == 1) {
+                System.out.println("Polish Food! Yum!");
+                System.out.println("Choose LUNCH. There are our Polish LUNCH sets");
+                orderLunch(lunches, Cuisine.POLISH, mainCourses, deserts, order);
+                orderDrink(drinks,order);
+            }
+            if (choose == 2) {
+                System.out.println("Mexican Food! Spicy!");
+                System.out.println("Choose LUNCH. There are our Mexican LUNCH sets");
+                orderLunch(lunches, Cuisine.MEXICAN, mainCourses, deserts, order);
+                orderDrink(drinks,order);
+            }
+            if (choose == 3) {
+                System.out.println("Italian Food! Delizioso!");
+                System.out.println("Choose LUNCH. There are our Italian LUNCH sets");
+                orderLunch(lunches, Cuisine.ITALIAN, mainCourses, deserts, order);
+                orderDrink(drinks,order);
+            }
+        }
+
+        order.calcTotalPrice();
+
+        System.out.println("\nDEBUG: Your Order = " + order.toString() + "\n");
+
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        System.out.println("Total cost = " + order.getTotalPrice() + "PLN");
+        System.out.println("Enjoy your meal!\n");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        System.out.println("\nClosing...\n");
+    }
+
+    private int validator(int min, int max) {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -38,7 +128,7 @@ public class RestaurantService {
     }
 
 
-    protected static void orderDrink(List<Drink> drinks, Order order) {
+    private void orderDrink(List<Drink> drinks, Order order) {
 
         // -1 in get() methods due to difference between entity id and List<> indexing
 
@@ -71,7 +161,7 @@ public class RestaurantService {
     }
 
 
-    protected static void orderLunch(List<Lunch> lunches, Cuisine cuisine, List<MainCourse> mainCourses, List<Desert> deserts, Order order) {
+    private void orderLunch(List<Lunch> lunches, Cuisine cuisine, List<MainCourse> mainCourses, List<Desert> deserts, Order order) {
 
         // -1 in get() methods due to difference between entity id and List<> indexing
 
@@ -117,7 +207,7 @@ public class RestaurantService {
 
 
 
-    protected static void printDatabase(List<Lunch> lunches, List<Drink> drinks, List<MainCourse> mainCourses, List<Desert> deserts) {
+    public void printDatabase() {
 
         System.out.println("\n~~~~ DATABASE PRINTING ~~~~\n");
 
