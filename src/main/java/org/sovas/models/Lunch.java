@@ -12,18 +12,19 @@ public class Lunch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int lunchId;
+    @Column(name = "ID")
+    private Long lunchId;
 
-    @Column
-    private int mainCourseId;
+    @Column(nullable = false, name = "NAME")
+    private String name;
 
-    @Column
-    private int desertId;
-
-    @Column
+    @Column(name = "CUISINE")
     private Cuisine cuisine;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "MAINCOURSE_ID")
+    private Long mainCourseId;
+
+    @Column(name = "DESERT_ID")
+    private Long desertId;
 
 }

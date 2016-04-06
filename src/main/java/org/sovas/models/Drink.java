@@ -11,12 +11,13 @@ public class Drink {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long drinkId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "NAME")
     private String name;
 
-    @Column
+    @Column(name = "PRICE")
     private double price;
 
 }
