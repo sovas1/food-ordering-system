@@ -92,9 +92,12 @@ public class ApplicationStarter extends RestaurantService {
 
         System.out.println("\nDEBUG: Your Order = " + order.toString() + "\n");
 
-        System.out.println("Total cost = " + order.getTotalPrice());
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        System.out.println("Total cost = " + order.getTotalPrice() + "PLN");
         System.out.println("Enjoy your meal!\n");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        System.out.println("\nClosing...\n");
 
 
     }

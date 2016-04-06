@@ -56,7 +56,7 @@ public class RestaurantService {
 
             for (Drink drink : drinks) {
                 System.out.print(drink.getDrinkId() + ". ");
-                System.out.print(drink.getName() + " - " + drink.getPrice() + "€\n");
+                System.out.print(drink.getName() + " - " + drink.getPrice() + "PLN\n");
                 max++;
             }
 
@@ -94,8 +94,8 @@ public class RestaurantService {
 
                 System.out.print(count + ". ");
                 System.out.print("Set name: " + lunch.getName());
-                System.out.print(", Main Course: " + mainCourse.getName() + " - " + mainCourse.getPrice() + "€");
-                System.out.print(", Desert: " + desert.getName() + " - " + desert.getPrice() + "€" + "\n");
+                System.out.print(", Main Course: " + mainCourse.getName() + " - " + mainCourse.getPrice() + "PLN");
+                System.out.print(", Desert: " + desert.getName() + " - " + desert.getPrice() + "PLN" + "\n");
 
                 count++;
             }
