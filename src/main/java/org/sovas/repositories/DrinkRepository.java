@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface DrinkRepository extends JpaRepository<Drink,Long>{
 
     @Query("from Drink")
-    Collection<Drink> getAll();
+    List<Drink> getAll();
 
 }
