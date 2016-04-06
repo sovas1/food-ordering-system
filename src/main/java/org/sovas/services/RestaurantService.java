@@ -18,7 +18,7 @@ import java.util.*;
 
 @Data
 @Service
-public class RestaurantService {
+public class RestaurantService implements Restaurant{
 
     // dao beans
     @Autowired
@@ -41,6 +41,7 @@ public class RestaurantService {
 
     static Order order = new Order();
 
+    @Override
     public void setUpDatabase() {
         lunches = lunchDaoBean.getAll();
         drinks = drinkDaoBean.getAll();
@@ -49,6 +50,7 @@ public class RestaurantService {
     }
 
 
+    @Override
     public void doOrder() {
         System.out.println("Hello Customer! How can I help you?");
         System.out.println("1. Order");
@@ -73,20 +75,20 @@ public class RestaurantService {
             if (choose == 1) {
                 System.out.println("Polish Food! Yum!");
                 System.out.println("Choose LUNCH. There are our Polish LUNCH sets");
-                orderLunch(lunches, Cuisine.POLISH, mainCourses, deserts, order);
-                orderDrink(drinks,order);
+                orderLunch(Cuisine.POLISH);
+                orderDrink();
             }
             if (choose == 2) {
                 System.out.println("Mexican Food! Spicy!");
                 System.out.println("Choose LUNCH. There are our Mexican LUNCH sets");
-                orderLunch(lunches, Cuisine.MEXICAN, mainCourses, deserts, order);
-                orderDrink(drinks,order);
+                orderLunch(Cuisine.MEXICAN);
+                orderDrink();
             }
             if (choose == 3) {
                 System.out.println("Italian Food! Delizioso!");
                 System.out.println("Choose LUNCH. There are our Italian LUNCH sets");
-                orderLunch(lunches, Cuisine.ITALIAN, mainCourses, deserts, order);
-                orderDrink(drinks,order);
+                orderLunch(Cuisine.ITALIAN);
+                orderDrink();
             }
         }
 
@@ -100,6 +102,35 @@ public class RestaurantService {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
 
         System.out.println("\nClosing...\n");
+    }
+
+    @Override
+    public void printDatabase() {
+
+        System.out.println("\n~~~~ DATABASE PRINTING ~~~~\n");
+
+        System.out.println("Lunches: ");
+        for (Lunch lunch : lunches) {
+            System.out.println(lunch.toString());
+        }
+
+        System.out.println("Drinks: ");
+        for (Drink drink : drinks) {
+            System.out.println(drink.toString());
+        }
+
+        System.out.println("Main Courses: ");
+        for (MainCourse mc : mainCourses) {
+            System.out.println(mc.toString());
+        }
+
+        System.out.println("Deserts: ");
+        for (Desert desert : deserts) {
+            System.out.println(desert.toString());
+        }
+
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
     }
 
     private int validator(int min, int max) {
@@ -128,7 +159,7 @@ public class RestaurantService {
     }
 
 
-    private void orderDrink(List<Drink> drinks, Order order) {
+    private void orderDrink() {
 
         // -1 in get() methods due to difference between entity id and List<> indexing
 
@@ -161,7 +192,7 @@ public class RestaurantService {
     }
 
 
-    private void orderLunch(List<Lunch> lunches, Cuisine cuisine, List<MainCourse> mainCourses, List<Desert> deserts, Order order) {
+    private void orderLunch(Cuisine cuisine) {
 
         // -1 in get() methods due to difference between entity id and List<> indexing
 
@@ -202,36 +233,6 @@ public class RestaurantService {
 
         order.setMainCourse(yourMainCourse);
         order.setDesert(yourDesert);
-
-    }
-
-
-
-    public void printDatabase() {
-
-        System.out.println("\n~~~~ DATABASE PRINTING ~~~~\n");
-
-        System.out.println("Lunches: ");
-        for (Lunch lunch : lunches) {
-            System.out.println(lunch.toString());
-        }
-
-        System.out.println("Drinks: ");
-        for (Drink drink : drinks) {
-            System.out.println(drink.toString());
-        }
-
-        System.out.println("Main Courses: ");
-        for (MainCourse mc : mainCourses) {
-            System.out.println(mc.toString());
-        }
-
-        System.out.println("Deserts: ");
-        for (Desert desert : deserts) {
-            System.out.println(desert.toString());
-        }
-
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
     }
 
