@@ -1,3 +1,6 @@
+NOTE: If u see any RED UNDERSCORES in code please enable LOMBOK PLUGIN
+
+
 Tools:
 
 - IntelliJ IDEA
