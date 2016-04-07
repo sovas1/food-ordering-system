@@ -57,6 +57,8 @@
 
     </dependencies>
 
+
+    <!-- To run with maven by "mvn spring-boot:run" -->
     <build>
         <plugins>
             <plugin>
