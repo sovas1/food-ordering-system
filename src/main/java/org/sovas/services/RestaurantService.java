@@ -139,17 +139,23 @@ public class RestaurantService implements Restaurant{
         order.setDrink(drinks.get(choose - 1));
 
         System.out.println("Ice Cubes? Lemons?");
-        System.out.println("1. Ice Cubes");
+        System.out.println("1. Ice Cubes (3pln)");
         System.out.println("2. Lemons (3pln)");
-        System.out.println("3. Nothing (3pln)");
+        System.out.println("3. Both (6pln)");
+        System.out.println("4. None");
 
-        choose = validator(1,3);
+        choose = validator(1,4);
+
+        final double PRICE = 3.0;
+
         switch (choose){
-            case 1: order.setIceCubesPrice(3.0);
-                break;
-            case 2: order.setLemonPrice(3.0);
-                break;
-            case 3: break;
+            case 1: order.setIceCubesPrice(PRICE);
+                    break;
+            case 2: order.setLemonPrice(PRICE);
+                    break;
+            case 3: order.setIceCubesPrice(PRICE);
+                    order.setLemonPrice(PRICE);
+                    break;
         }
     }
 
