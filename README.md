@@ -5,7 +5,7 @@ Tools:
 
 - IntelliJ IDEA
 - Maven
-- Lombock
+- Lombok
 
 
 
@@ -29,10 +29,11 @@ or
 
 
 
+
 Implementation description:
 - the idea was to design an extendable application for restaurant ordering system, so I decided to use Spring Boot and H2Database,
 - database script (data.sql) is loaded by Spring Boot when application start,
-- in script you can add your drinks/sets of lunches and thats all, program will run correctly (is extendable),
+- in script you can add your drinks/sets of lunches and that's all, program will run correctly (is extendable),
 - project has a few layers,
 - data is beign accessed by JpaRepository,
 - dao classes provides services
