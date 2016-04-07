@@ -11,11 +11,17 @@ public class Order {
 
     MainCourse mainCourse;
     Desert desert;
+
     Drink drink;
+    double iceCubesPrice;
+    double lemonPrice;
+
 
     double totalPrice;
 
     public void calcTotalPrice() {
+
+        totalPrice += iceCubesPrice + lemonPrice;
 
         try {
             totalPrice += drink.getPrice();

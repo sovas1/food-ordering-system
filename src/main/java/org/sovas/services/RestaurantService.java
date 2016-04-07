@@ -164,12 +164,11 @@ public class RestaurantService implements Restaurant{
         // -1 in get() methods due to difference between entity id and List<> indexing
 
         System.out.println("You look thirsty! Maybe something to drink?");
-
         System.out.println("1. Yes");
         System.out.println("2. No");
 
         int choose = validator(1,2);
-
+        
         if(choose==1){
 
             int max = 0;
@@ -183,6 +182,20 @@ public class RestaurantService implements Restaurant{
 
             choose = validator(1, max);
             order.setDrink(drinks.get(choose - 1));
+
+            System.out.println("Ice Cubes? Lemons?");
+            System.out.println("1. Ice Cubes");
+            System.out.println("2. Lemons (3pln)");
+            System.out.println("3. Nothing (3pln)");
+
+            choose = validator(1,3);
+            switch (choose){
+                case 1: order.setIceCubesPrice(3.0);
+                        break;
+                case 2: order.setLemonPrice(3.0);
+                        break;
+                case 3: break;
+            }
 
         }
         if(choose==2){
