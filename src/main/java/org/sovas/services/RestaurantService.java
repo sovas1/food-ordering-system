@@ -59,37 +59,11 @@ public class RestaurantService implements Restaurant{
 
         int choose = validator(1,2);
 
-        if (choose == 2) {
-            System.out.println("Have a nice day!");
-            return;
-        }
-
-        if (choose == 1) {
-            System.out.println("Pick cuisine");
-            System.out.println("1. Polish");
-            System.out.println("2. Mexican");
-            System.out.println("3. Italian");
-
-            choose = validator(1,3);
-
-            if (choose == 1) {
-                System.out.println("Polish Food! Yum!");
-                System.out.println("Choose LUNCH. There are our Polish LUNCH sets");
-                orderLunch(Cuisine.POLISH);
-                orderDrink();
-            }
-            if (choose == 2) {
-                System.out.println("Mexican Food! Spicy!");
-                System.out.println("Choose LUNCH. There are our Mexican LUNCH sets");
-                orderLunch(Cuisine.MEXICAN);
-                orderDrink();
-            }
-            if (choose == 3) {
-                System.out.println("Italian Food! Delizioso!");
-                System.out.println("Choose LUNCH. There are our Italian LUNCH sets");
-                orderLunch(Cuisine.ITALIAN);
-                orderDrink();
-            }
+        switch(choose) {
+            case 1: askedForOrder();
+                    break;
+            case 2: System.out.println("Have a nice day!");
+                    return;
         }
 
         order.calcTotalPrice();
@@ -103,6 +77,82 @@ public class RestaurantService implements Restaurant{
 
         System.out.println("\nClosing...\n");
     }
+
+    private void askedForOrder() {
+        System.out.println("Pick cuisine");
+        System.out.println("1. Polish");
+        System.out.println("2. Mexican");
+        System.out.println("3. Italian");
+
+        int choose = validator(1,3);
+
+        switch(choose) {
+            case 1: System.out.println("Polish Food! Yum!");
+                    System.out.println("Choose LUNCH. There are our Polish LUNCH sets");
+                    orderLunch(Cuisine.POLISH);
+                    orderDrink();
+                    break;
+            case 2: System.out.println("Mexican Food! Spicy!");
+                    System.out.println("Choose LUNCH. There are our Mexican LUNCH sets");
+                    orderLunch(Cuisine.MEXICAN);
+                    orderDrink();
+                    break;
+            case 3: System.out.println("Italian Food! Delizioso!");
+                    System.out.println("Choose LUNCH. There are our Italian LUNCH sets");
+                    orderLunch(Cuisine.ITALIAN);
+                    orderDrink();
+                    break;
+        }
+    }
+
+    private void orderDrink() {
+
+        // -1 in get() methods due to difference between entity id and List<> indexing
+
+        System.out.println("You look thirsty! Maybe something to drink?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+
+        int choose = validator(1,2);
+
+        switch(choose) {
+            case 1: askedForDrink();
+                break;
+            case 2: System.out.println("As you wish");
+                break;
+
+        }
+
+    }
+
+    private void askedForDrink() {
+        int max = 0;
+        System.out.println("Here are our drinks:");
+
+        for (Drink drink : drinks) {
+            System.out.print(drink.getDrinkId() + ". ");
+            System.out.print(drink.getName() + " - " + drink.getPrice() + "PLN\n");
+            max++;
+        }
+
+        int choose = validator(1, max);
+        order.setDrink(drinks.get(choose - 1));
+
+        System.out.println("Ice Cubes? Lemons?");
+        System.out.println("1. Ice Cubes");
+        System.out.println("2. Lemons (3pln)");
+        System.out.println("3. Nothing (3pln)");
+
+        choose = validator(1,3);
+        switch (choose){
+            case 1: order.setIceCubesPrice(3.0);
+                break;
+            case 2: order.setLemonPrice(3.0);
+                break;
+            case 3: break;
+        }
+    }
+
 
     @Override
     public void printDatabase() {
@@ -159,52 +209,6 @@ public class RestaurantService implements Restaurant{
     }
 
 
-    private void orderDrink() {
-
-        // -1 in get() methods due to difference between entity id and List<> indexing
-
-        System.out.println("You look thirsty! Maybe something to drink?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
-
-        int choose = validator(1,2);
-        
-        if(choose==1){
-
-            int max = 0;
-            System.out.println("Here are our drinks:");
-
-            for (Drink drink : drinks) {
-                System.out.print(drink.getDrinkId() + ". ");
-                System.out.print(drink.getName() + " - " + drink.getPrice() + "PLN\n");
-                max++;
-            }
-
-            choose = validator(1, max);
-            order.setDrink(drinks.get(choose - 1));
-
-            System.out.println("Ice Cubes? Lemons?");
-            System.out.println("1. Ice Cubes");
-            System.out.println("2. Lemons (3pln)");
-            System.out.println("3. Nothing (3pln)");
-
-            choose = validator(1,3);
-            switch (choose){
-                case 1: order.setIceCubesPrice(3.0);
-                        break;
-                case 2: order.setLemonPrice(3.0);
-                        break;
-                case 3: break;
-            }
-
-        }
-        if(choose==2){
-            System.out.println("As you wish");
-        }
-
-    }
-
-
     private void orderLunch(Cuisine cuisine) {
 
         // -1 in get() methods due to difference between entity id and List<> indexing
@@ -248,5 +252,7 @@ public class RestaurantService implements Restaurant{
         order.setDesert(yourDesert);
 
     }
+
+
 
 }
